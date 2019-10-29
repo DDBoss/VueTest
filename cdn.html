@@ -1,0 +1,95 @@
+<html>
+    <header>
+        <title>To Do CDN</title>
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </header>
+    
+    <body>
+        <div id="app">
+            <input type="text" class="todo-input" placeholder="What needs to be done ?" v-model="newToDo" @keyup.enter="addToDo"
+            />
+
+            <button v-on:click="addToDo" class="btn btn-dark">Add Task</button>
+
+            <div v-for="todo in todos" :key="todo.id" class="todo-item">
+                <div>
+                    {{ todo.id }} -
+                    {{ todo.title }}
+                </div>
+            </div>
+
+        </div>
+        <script>
+                var vue = new Vue ({
+                  el: '#app',
+                  name: "todo-list",
+                  
+                  data() {
+                    return {
+                      newToDo: "",
+                      idForTodo: 1,
+                      todos: [
+                        {
+                          
+                        }
+                      ]
+                    };
+                  },
+                  methods: {
+                    addToDo() {
+                      if (this.newToDo.trim().length == 0) {
+                        return;
+                      }
+                
+                      this.todos.push({
+                        id: this.idForTodo,
+                        title: this.newToDo,
+                        completed: false
+                      });
+                
+                      this.newToDo = "";
+                      this.idForTodo++;
+                    }
+                  }
+                });
+                </script>
+
+<!-- <style lang="scss">
+        .todo-input {
+          width: 45%;
+          padding: 10px 18px;
+          font-size: 18px;
+          margin-bottom: 16px;
+          &:focus {
+            outline: 0;
+          }
+        }
+        
+        .todo-item {
+          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        
+        .remove-item {
+          cursor: pointer;
+          margin-left: 14px;
+          &:hover {
+            color: black;
+          }
+        }
+
+        #app {
+            color: red;
+            margin-top: 150px;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+        </style> -->
+
+    </body>
+</html>
